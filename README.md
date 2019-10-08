@@ -1,2 +1,1 @@
-# space-invaders
-A full Space Invaders game, based on the Alien Invasion game from Python Crash Course.
+Recreation of the Alien Invasion project from "Python Crash Course"
