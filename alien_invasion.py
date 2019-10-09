@@ -19,7 +19,6 @@ def run_game():
     screen = pygame.display.set_mode((ai_settings.screen_width, ai_settings.screen_height))
     pygame.display.set_caption("Alien Invasion")
 
-    # Make the Play button
     play_button = Button(screen=screen, msg="Play Space Invaders")
 
     menu = Menu(screen=screen, play_button=play_button, is_start=True)

@@ -17,12 +17,16 @@ class Alien(Sprite):
 
         # Set alien type
         self.alien_type = row_number
+        self.score_value = (3 - self.alien_type) * ai_settings.alien_points
 
         # Load the alien image and set its rect attribute
         self.image = pygame.image.load('images/alien{}/alien{}0.png'.format(self.alien_type, self.alien_type))
         self.rect = self.image.get_rect()
-        self.frames = [pygame.image.load('images/alien{}/alien{}{}.png'.format(self.alien_type, self.alien_type,i)) for i in range(0,2)]
+        self.frames = [pygame.image.load('images/alien{}/alien{}{}.png'.format(self.alien_type, self.alien_type, i)) for i in range(0, 2)]
         self.timer = Timer(self.frames)
+        self.boom_frames = [pygame.image.load('images/alien_boom/alien_boom{}.png'.format(i)) for i in range(0, 3)]
+
+        self.is_boom = False
 
         # Start each new alien near the top left of the screen
         self.rect.x = self.rect.width
@@ -30,7 +34,6 @@ class Alien(Sprite):
 
         # Store the alien's exact position
         self.x = float(self.rect.x)
-
 
     def blitme(self):
         """Draw the alien at its current location"""
@@ -41,6 +44,12 @@ class Alien(Sprite):
         self.x += (self.ai_settings.alien_speed_factor * self.ai_settings.fleet_direction)
         self.rect.x = self.x
         self.image = self.timer.imagerect()
+
+    def boom(self):
+        """Blow the alien up"""
+        self.timer.frames = self.boom_frames
+        self.timer.looponce = True
+        self.is_boom = True
 
     def check_edges(self):
         """Return True if alien is at edge of screen"""

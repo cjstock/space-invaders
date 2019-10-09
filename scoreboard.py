@@ -16,7 +16,7 @@ class Scoreboard:
         self.ships = None
 
         # Font settings for scoring information
-        self.text_color = (30, 30, 30)
+        self.text_color = self.ai_settings.score_text_color
         self.font = pygame.font.SysFont(None, 48)
         self.score_image = None
         self.score_rect = None
