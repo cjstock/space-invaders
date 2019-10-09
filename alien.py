@@ -1,6 +1,9 @@
 import pygame
 from pygame.sprite import Sprite
 from frame_timer import Timer
+from alien_bullet import Alien_Bullet
+
+import game_functions as gf
 
 
 class Alien(Sprite):
@@ -46,3 +49,7 @@ class Alien(Sprite):
             return True
         elif self.rect.left <= 0:
             return True
+
+    def fire_bullet(self, alien_bullets):
+        newBullet = Alien_Bullet(ai_settings=self.ai_settings, screen=self.screen, x=self.rect.x, y=self.rect.y)
+        alien_bullets.add(newBullet)
