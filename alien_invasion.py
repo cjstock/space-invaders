@@ -7,6 +7,7 @@ from game_stats import GameStats
 import game_functions as gf
 from button import Button
 from scoreboard import Scoreboard
+from menu import Menu
 
 
 def run_game():
@@ -19,7 +20,9 @@ def run_game():
     pygame.display.set_caption("Alien Invasion")
 
     # Make the Play button
-    play_button = Button(screen=screen, msg="Play")
+    play_button = Button(screen=screen, msg="Play Space Invaders")
+
+    menu = Menu(screen=screen, play_button=play_button, is_start=True)
 
     stats = GameStats(ai_settings=ai_settings)
     sb = Scoreboard(ai_settings=ai_settings, screen=screen, stats=stats)
@@ -30,7 +33,7 @@ def run_game():
     # Make a ship
     ship = Ship(ai_settings=ai_settings, screen=screen)
 
-    # Make a gropu to store bullets in
+    # Make a group to store bullets in
     bullets = Group()
 
     # Create a fleet of aliens
@@ -50,7 +53,7 @@ def run_game():
                              bullets=bullets, sb=sb)
 
         gf.update_screen(ai_settings=ai_settings, screen=screen, ship=ship, bullets=bullets, aliens=aliens,
-                         play_button=play_button, stats=stats, sb=sb)
+                         play_button=play_button, menu=menu, stats=stats, sb=sb)
 
 
 run_game()

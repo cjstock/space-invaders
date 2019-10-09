@@ -6,7 +6,7 @@ from bullet import Bullet
 from alien import Alien
 
 
-def update_screen(ai_settings, screen, ship, bullets, aliens, stats, play_button, sb):
+def update_screen(ai_settings, screen, ship, bullets, aliens, stats, menu, play_button, sb):
     """Update images on the screen and flip to the new screen"""
     screen.fill(ai_settings.bg_color)
 
@@ -22,6 +22,7 @@ def update_screen(ai_settings, screen, ship, bullets, aliens, stats, play_button
 
     # Draw the play button if the game is inactive
     if not stats.game_active:
+        menu.draw_menu()
         play_button.draw_button()
 
     pygame.display.flip()
@@ -117,10 +118,10 @@ def create_fleet(ai_settings, screen, aliens, ship):
     """Create a fleet of aliens"""
     """Create an alien and find the number of aliens in a row, 
     where the spacing between each alien is one alien width"""
-    alien = Alien(ai_settings, screen)
+    alien = Alien(ai_settings=ai_settings, screen=screen, row_number=0)
     number_aliens_x = get_number_aliens_x(ai_settings=ai_settings, alien_width=alien.rect.width)
     number_rows = get_number_rows(ai_settings=ai_settings, ship_height=ship.rect.height, alien_height=alien.rect.height)
-    
+
     # Create the fleet
     for row_number in range(number_rows):
         for alien_number in range(number_aliens_x):
@@ -137,7 +138,7 @@ def get_number_aliens_x(ai_settings, alien_width):
 
 def create_alien(ai_settings, screen, aliens, alien_number, row_number):
     """Create an alien and place it in the row"""
-    alien = Alien(ai_settings=ai_settings, screen=screen)
+    alien = Alien(ai_settings=ai_settings, screen=screen, row_number=row_number)
     alien_width = alien.rect.width
     alien.x = alien_width + 2 * alien_width * alien_number
     alien.rect.x = alien.x
